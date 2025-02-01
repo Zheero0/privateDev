@@ -19,20 +19,22 @@ export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(true);
 
   return (
-<div
-  // Removed the default Tailwind shadow class and added a custom inline style
-className={`fixed top-0 left-0 h-screen bg-blue-950 text-white flex flex-col transition-all duration-300 ${
-    isOpen ? "w-44" : "w-14"
-} min-w-[3rem]`}
-style={{ boxShadow: "2px 0 8px rgba(0, 0, 0, 0.3)" }}
->
-{/* Sidebar content */}
+    <div
+      // Removed the default Tailwind shadow class and added a custom inline style
+      className={`fixed top-0 left-0 h-screen bg-blue-950 text-white flex flex-col transition-all duration-300 ${
+        isOpen ? "w-44" : "w-14"
+      } min-w-[3rem]`}
+      style={{ boxShadow: "2px 0 8px rgba(0, 0, 0, 0.3)" }}
+    >
+      {/* Sidebar content */}
 
-
-    {/* Sidebar Header */}
+      {/* Sidebar Header */}
       <div className="flex items-center justify-between p-4">
-              {isOpen && <Link href={"/"}><h1 className="text-xl font-bold">Marketplace</h1>
-        </Link> }
+        {isOpen && (
+          <Link href={"/"}>
+            <h1 className="text-xl font-bold">Marketplace</h1>
+          </Link>
+        )}
         {/* <button
           onClick={() => setIsOpen(!isOpen)}
           className="text-gray-400 "
@@ -100,7 +102,7 @@ style={{ boxShadow: "2px 0 8px rgba(0, 0, 0, 0.3)" }}
         ) : (
           <Link
             href="/login"
-            className="w-full flex items-center space-x-3 p-3 text-left rounded-lg transition"
+            className="w-full flex items-center space-x-3 p-3 text-left rounded-lg transition text-gray-400 hover:scale-105 hover:text-gray-200 duration-[0.5s] group"
           >
             <FiLogIn size={20} />
             {isOpen && <span>Login</span>}
@@ -113,15 +115,15 @@ style={{ boxShadow: "2px 0 8px rgba(0, 0, 0, 0.3)" }}
 
 // Sidebar Item Component
 function SidebarItem({ href, icon, label, isOpen }) {
-  return (
+return (
     <li>
-      <Link
-        href={href}
-        className="flex items-center space-x-3 p-3 rounded-lg transition"
-      >
-        <span className="text-gray-400"> {icon}</span>
-        {isOpen && <span className="text-xs text-gray-400">{label}</span>}
-      </Link>
+        <Link
+            href={href}
+            className="flex items-center space-x-3 p-3 rounded-lg transition hover:scale-105 hover:text-gray-200 duration-[0.5s] group"
+        >
+            <span className="text-gray-400 text-xl group-hover:text-gray-200"> {icon}</span>
+            {isOpen && <span className="text-sm text-gray-400 group-hover:text-gray-200">{label}</span>}
+        </Link>
     </li>
-  );
+);
 }
