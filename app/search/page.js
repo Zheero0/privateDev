@@ -50,7 +50,7 @@ const searchPage = () => {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
-      <div className="mt-4">
+      {/* <div className="mt-4">
         <button
           onClick={handleJobSubmit}
           type="submit"
@@ -58,7 +58,7 @@ const searchPage = () => {
         >
           Add Job
         </button>
-      </div>
+      </div> */}
       <JobListings />
     </div>
   );
