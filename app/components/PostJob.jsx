@@ -164,7 +164,7 @@ export default function PostJob() {
               id="imageURL"
               value={imageURL}
               onChange={(e) => setImageURL(e.target.value)}
-              placeholder="https://example.com/image.jpg"
+              placeholder="Dont upload image, not setup"
               className="mt-1 block w-full border border-gray-300 rounded-md p-2 shadow-sm focus:ring-blue-500 focus:border-blue-500"
             />
           </div>

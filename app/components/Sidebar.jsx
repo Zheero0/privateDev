@@ -45,7 +45,7 @@ export default function Sidebar() {
 
       {/* Sidebar Navigation */}
       <nav className="flex-1  text-xs">
-        <ul className="space-y-2">
+        <ul className="space-y-1">
           <SidebarItem
             href="/search"
             icon={<FiSearch />}
@@ -93,7 +93,7 @@ export default function Sidebar() {
             </Link>
             <button
               onClick={logOut}
-              className="w-full flex text-xs items-center space-x-3 p-3 text-left rounded-lg transition"
+              className="w-full flex text-xs items-center font-semibold space-x-3 p-3 text-left rounded-lg transition  text-gray-400 hover:scale-105 hover:text-gray-200 duration-[0.5s] group"
             >
               <FiLogOut size={13} />
               {isOpen && <span>Sign Out</span>}
@@ -102,7 +102,7 @@ export default function Sidebar() {
         ) : (
           <Link
             href="/login"
-            className="w-full flex items-center space-x-3 p-3 text-left rounded-lg transition text-gray-400 hover:scale-105 hover:text-gray-200 duration-[0.5s] group"
+            className="w-full flex items-center space-x-3 p-3 font-semibold text-left rounded-lg transition text-gray-400 hover:scale-105 hover:text-gray-200 duration-[0.5s] group"
           >
             <FiLogIn size={20} />
             {isOpen && <span>Login</span>}
@@ -119,10 +119,10 @@ return (
     <li>
         <Link
             href={href}
-            className="flex items-center space-x-3 p-3 rounded-lg transition hover:scale-105 hover:text-gray-200 duration-[0.5s] group"
+            className="flex items-center space-x-2 p-3 rounded-lg transition hover:scale-105 hover:text-gray-200 duration-[0.5s] group"
         >
             <span className="text-gray-400 text-xl group-hover:text-gray-200"> {icon}</span>
-            {isOpen && <span className="text-sm text-gray-400 group-hover:text-gray-200">{label}</span>}
+            {isOpen && <span className="text-sm font-semibold text-gray-400 group-hover:text-gray-200">{label}</span>}
         </Link>
     </li>
 );
