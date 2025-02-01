@@ -3,6 +3,7 @@ import "./globals.css";
 import { AuthProvider } from "@/context/authContext/auth";
 import NavBar from "./components/Navbar"; // Correct for default exports
 import { Footer } from "./components/Footer";
+import Sidebar from "./components/Sidebar";
 
 
 const geistSans = Geist({
@@ -27,10 +28,14 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <AuthProvider>
-          <NavBar />{" "}
-          {/* NavBar included here to be available across all pages wrapped by RootLayout */}
-          {children}
-          <Footer />
+          {/* 🚀 FIXED: Sidebar + Main Content in a Flexbox Layout */}
+          <div className="flex min-h-screen">
+            <Sidebar />
+            <div className="flex-1 flex flex-col">
+              <main className="flex-1 bg-white">{children}</main>
+              {/* <Footer /> */}
+            </div>
+          </div>
         </AuthProvider>
       </body>
     </html>

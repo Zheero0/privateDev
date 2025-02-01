@@ -5,6 +5,7 @@ import { useAuth } from "@/context/authContext/auth";
 import { db } from "@/firebase/firebase";
 import { collection, addDoc } from "firebase/firestore";
 import { Hero } from "./components/Hero";
+import Testimonials from "./components/Testimonial";
 
 export default function Home() {
   const { userLoggedIn, currentUser } = useAuth();
@@ -91,6 +92,7 @@ export default function Home() {
   return (
     <div className="flex flex-col">
       <Hero />
+      <Testimonials />
       {/* <button
         className="bg-green-500 px-4 py-2 text-white rounded"
         onClick={googleSignIn}
@@ -102,7 +104,7 @@ export default function Home() {
       <button onClick={handleSignOut} className="bg-red-500">
         sign out
       </button> */}
-      <button onClick={addJob} className="bg-blue-500">
+      {/* <button onClick={addJob} className="bg-blue-500">
         Add Job
       </button>
       <form onSubmit={handleJobSubmit} className="flex flex-col">
@@ -135,7 +137,7 @@ export default function Home() {
         />
 
         <button type="submit">Submit</button>
-      </form>
+      </form> */}
 
       {/* <form>
         <input type="text" placeholder="Job Name" />

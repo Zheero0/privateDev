@@ -10,7 +10,7 @@ import React from "react";
 import JobListings from "../components/JobListings";
 import { useAuth } from "@/context/authContext/auth";
 
-const AddJobPage = () => {
+const searchPage = () => {
   const { currentUser } = useAuth();
 
   const handleJobSubmit = async (e) => {
@@ -64,4 +64,4 @@ const AddJobPage = () => {
   );
 };
 
-export default AddJobPage;
+export default searchPage;

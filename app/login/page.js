@@ -13,7 +13,7 @@ export default function loginPage (){
 
     useEffect(() => {
         if (currentUser) {
-            router.push('/anotherpage');
+            router.push('/profile');
         }
     }, [currentUser]);
 
