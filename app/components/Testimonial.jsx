@@ -7,7 +7,7 @@ const testimonials = [
     review:
       "This app has completely transformed my career. I've found more work and higher-paying clients!",
     rating: 5,
-    avatarColor: "bg-green-500",
+    avatarColor: "bg-blue-950",
   },
   {
     name: "Alisson Becker",
@@ -23,7 +23,7 @@ const testimonials = [
     review:
       "Since using this app, I've found more work and higher-paying clients. It's been a game-changer for my business!",
     rating: 5,
-    avatarColor: "bg-green-500",
+    avatarColor: "bg-blue-950",
   },
 ];
 
@@ -55,7 +55,7 @@ export default function Testimonials() {
               {Array(testimonial.rating)
                 .fill(0)
                 .map((_, i) => (
-                  <span key={i} className="text-green-500 text-lg">
+                  <span key={i} className="text-blue-500 text-lg">
                     ★
                   </span>
                 ))}
