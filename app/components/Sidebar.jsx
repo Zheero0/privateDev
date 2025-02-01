@@ -21,12 +21,12 @@ export default function Sidebar() {
   return (
 <div
   // Removed the default Tailwind shadow class and added a custom inline style
-  className={`fixed top-0 left-0 h-screen bg-blue-400 text-black flex flex-col transition-all duration-300 ${
+className={`fixed top-0 left-0 h-screen bg-blue-950 text-white flex flex-col transition-all duration-300 ${
     isOpen ? "w-44" : "w-14"
-  } min-w-[3rem]`}
-  style={{ boxShadow: "2px 0 8px rgba(0, 0, 0, 0.3)" }}
+} min-w-[3rem]`}
+style={{ boxShadow: "2px 0 8px rgba(0, 0, 0, 0.3)" }}
 >
-  {/* Sidebar content */}
+{/* Sidebar content */}
 
 
     {/* Sidebar Header */}
@@ -119,8 +119,8 @@ function SidebarItem({ href, icon, label, isOpen }) {
         href={href}
         className="flex items-center space-x-3 p-3 rounded-lg transition"
       >
-        <span>{icon}</span>
-        {isOpen && <span className="text-xs">{label}</span>}
+        <span className="text-gray-400"> {icon}</span>
+        {isOpen && <span className="text-xs text-gray-400">{label}</span>}
       </Link>
     </li>
   );
