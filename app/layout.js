@@ -17,8 +17,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Chat.io",
-  description: "Chat.io is a chat application built with Next.js and Firebase.",
+  title: "Marketplace",
+  description: "Marketplace is a job markeplace application built with Next.js and Firebase.",
 };
 
 export default function RootLayout({ children }) {
@@ -31,7 +31,7 @@ export default function RootLayout({ children }) {
           {/* 🚀 FIXED: Sidebar + Main Content in a Flexbox Layout */}
           <div className="flex min-h-screen">
             <Sidebar />
-            <div className="flex-1 flex flex-col">
+            <div className="flex-1 flex flex-col ml-44">
               <main className="flex-1 bg-white">{children}</main>
               {/* <Footer /> */}
             </div>

@@ -1,35 +1,35 @@
 import React from "react";
 
 const testimonials = [
-    {
-        name: "Mathew Conway",
-        role: "Product Designer",
-        review:
-            "This site has completely transformed my workflow. The real-time color updates are a game-changer!",
-        rating: 5,
-        avatarColor: "bg-green-500",
-    },
-    {
-        name: "Alisson Becker",
-        role: "Creative Director",
-        review:
-            "I was able to find the perfect color palette for my project in minutes. Highly recommend!",
-        rating: 5,
-        avatarColor: "bg-gray-400",
-    },
-    {
-        name: "Sanjay Ravel",
-        role: "Developer",
-        review:
-            "As a developer, I appreciate the simplicity and efficiency of this tool. It's a must-have for any project.",
-        rating: 5,
-        avatarColor: "bg-green-400",
-    },
+  {
+    name: "Mathew Conway",
+    role: "Product Designer",
+    review:
+      "This app has completely transformed my career. I've found more work and higher-paying clients!",
+    rating: 5,
+    avatarColor: "bg-green-500",
+  },
+  {
+    name: "Alisson Becker",
+    role: "Creative Director",
+    review:
+      "I was able to connect with top-tier clients for my projects in minutes. Highly recommend this platform!",
+    rating: 5,
+    avatarColor: "bg-gray-400",
+  },
+  {
+    name: "Rish Naval",
+    role: "Plumber",
+    review:
+      "Since using this app, I've found more work and higher-paying clients. It's been a game-changer for my business!",
+    rating: 5,
+    avatarColor: "bg-green-500",
+  },
 ];
 
 export default function Testimonials() {
   return (
-    <section className="py-12 bg-gray-50">
+    <section className="py-12 ">
       <div className="max-w-4xl mx-auto text-center">
         <h2 className="text-3xl font-bold text-gray-900">Testimonials</h2>
         <p className="text-gray-600 mt-2">

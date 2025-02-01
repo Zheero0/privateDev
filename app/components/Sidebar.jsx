@@ -31,7 +31,7 @@ export default function Sidebar() {
 
     {/* Sidebar Header */}
       <div className="flex items-center justify-between p-4">
-              {isOpen && <Link href={"/"}><h1 className="text-xl font-bold">Chat.io</h1>
+              {isOpen && <Link href={"/"}><h1 className="text-xl font-bold">Marketplace</h1>
         </Link> }
         {/* <button
           onClick={() => setIsOpen(!isOpen)}
