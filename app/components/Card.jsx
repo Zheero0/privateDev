@@ -19,7 +19,7 @@ export const Card = ({ job, daysListed }) => {
         className="w-full h-[150px] object-cover"
       />
       <div className="pb-1 pt- px-3">
-        <h2 className="text-[0.8rem] my-1 font-semibold text-gray-700">
+        <h2 className="text-[0.9rem] my-1 font-semibold text-gray-700">
           {truncate(job.title, 25)}
         </h2>
         <div className="flex items-center mb-1">
@@ -28,10 +28,10 @@ export const Card = ({ job, daysListed }) => {
             alt={job.postedBy?.uid}
             className="w-5 h-5 rounded-full object-cover mr-2"
           />
-          <p className="text-[0.5rem] font-semibold text-gray-700">
+          <p className="text-[0.6rem] font-semibold text-gray-700">
             {job.postedBy.uid}
           </p>
-          <p className="text-[0.5rem] font-semibold text-gray-700">
+          <p className="text-[0.7rem] font-semibold text-gray-700">
             {job.postedBy.displayName}
           </p>
         </div>
@@ -45,8 +45,8 @@ export const Card = ({ job, daysListed }) => {
         </p>
         <div className=" text-gray-500">
           <div className="flex items-center space-x-1">
-            <FaClock size={12} className="text-gray-500" />
-            <p className="text-xs text-gray-500">{daysListed} days ago</p>
+            <FaClock size={10} className="text-gray-500" />
+            <p className="text-[10px] text-gray-500">{daysListed} days ago</p>
           </div>
 
         </div>
