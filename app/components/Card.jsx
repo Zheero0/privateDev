@@ -40,10 +40,11 @@ export const Card = ({ job, daysListed }) => {
         </p>
       </div>
       <div className="px-4 pb-2 flex justify-between items-center">
- 
-        <p className="text-blue-800 text-xl font-semibold">£200</p>
-        <div className="flex  text-gray-500">
-          <div className="flex justify-center ">
+        <p className="text-blue-800 text-xl font-semibold">
+          <span className="text-sm font-medium">£</span>{job.price}
+        </p>
+        <div className="flex text-gray-500">
+          <div className="flex justify-center">
             <FaClock size={8} className="inline-block mr-1" />
             <p className="text-xs text-[0.6rem]">{daysListed} days ago</p>
           </div>
