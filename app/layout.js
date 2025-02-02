@@ -1,20 +1,21 @@
 import { Geist, Geist_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
+
 import "./globals.css";
 import { AuthProvider } from "@/context/authContext/auth";
+
 import NavBar from "./components/Navbar"; // Correct for default exports
 import { Footer } from "./components/Footer";
 import Sidebar from "./components/Sidebar";
 
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+// Load Inter font
+const inter = Inter({
   subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+  weight: ["400", "500", "600", "700"], // Adjust based on needs
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata = {
   title: "Marketplace",
@@ -23,16 +24,15 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+    <html lang="en" className={inter.variable}>
+      <body className={`${inter.className} antialiased`}>
         <AuthProvider>
           {/* 🚀 FIXED: Sidebar + Main Content in a Flexbox Layout */}
           <div className="flex min-h-screen">
+            
             <Sidebar />
-            <div className="flex-1 flex flex-col ml-44">
-              <main className="flex-1 bg-white">{children}</main>
+            <div className="flex-1 flex flex-col  ml-[9.5rem]">
+              <main className="flex-1 bg-white pl-5 pt-5">{children}</main>
               {/* <Footer /> */}
             </div>
           </div>

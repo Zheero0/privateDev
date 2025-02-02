@@ -21,9 +21,8 @@ export default function Sidebar() {
   return (
     <div
       // Removed the default Tailwind shadow class and added a custom inline style
-      className={`fixed top-0 left-0 h-screen bg-blue-950 text-white flex flex-col transition-all duration-300 ${
-        isOpen ? "w-44" : "w-14"
-      } min-w-[3rem]`}
+      className={`fixed top-0 left-0 h-screen bg-blue-950 text-white flex flex-col transition-all duration-300 
+       w-40 min-w-[3rem] min-h-full z-50`}
       style={{ boxShadow: "2px 0 8px rgba(0, 0, 0, 0.3)" }}
     >
       {/* Sidebar content */}

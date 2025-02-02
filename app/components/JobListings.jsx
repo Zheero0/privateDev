@@ -33,7 +33,7 @@ const JobListings = () => {
   }, []); // Empty dependency array ensures it runs only once
 
   return (
-    <div className="p-4 grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+    <div className="p-8 grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
       {loading ? (
         <p className="col-span-full text-center">Loading jobs...</p>
       ) : jobs.length > 0 ? (
@@ -50,7 +50,7 @@ const JobListings = () => {
                 ); // Convert to days
                 return days;
               })()
-            : "N/A";
+            : "0";
 
           // Format the postedDate in GMT
           const formattedDate = job.postedDate

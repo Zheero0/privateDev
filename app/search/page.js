@@ -9,6 +9,8 @@ import { db } from "@/firebase/firebase";
 import React from "react";
 import JobListings from "../components/JobListings";
 import { useAuth } from "@/context/authContext/auth";
+import Search from "../components/Search";
+import { FiSliders } from "react-icons/fi";
 
 const searchPage = () => {
   const { currentUser } = useAuth();
@@ -49,17 +51,20 @@ const searchPage = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen">
-      {/* <div className="mt-4">
-        <button
-          onClick={handleJobSubmit}
-          type="submit"
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        >
-          Add Job
-        </button>
-      </div> */}
-      <JobListings />
+    <div className="flex flex-col   min-h-full  overflow-hidden">
+      <div className="mt-5 w-full ">
+        <Search />
+
+        <div className=" ml-1 w-full flex  ">
+          <div className=" flex   py-2 px-4 hover:scale-105 hover:border-blue-600  duration-[0.5s] items-center  bg-transparent text-blue-900  rounded-full">
+            <button type="submit" className=" font-bold mr-1 ">
+              Filters
+            </button>
+            <FiSliders />
+          </div>
+        </div>
+        <JobListings />
+      </div>
     </div>
   );
 };

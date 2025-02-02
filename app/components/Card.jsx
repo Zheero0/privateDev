@@ -11,7 +11,7 @@ export const Card = ({ job, daysListed }) => {
   return (
     <div
       key={job.id}
-      className="bg-white shadow-lg rounded-lg max-w-[200px] overflow-hidden w-full max-h-[400px] h-full transform hover:scale-105 transition-all duration-300"
+      className="bg-white  rounded-lg max-w-[250px] overflow-hidden w-full max-h-[400px] h-full transform hover:scale-105 transition-all duration-300"
     >
       <img
         src={job.images?.[0] || "https://via.placeholder.com/400x300"}
@@ -40,13 +40,13 @@ export const Card = ({ job, daysListed }) => {
         </p>
       </div>
       <div className="px-4 pb-2 flex justify-between items-center">
-        <div className="flex items-center text-gray-500">
-          {/* <FaUser size={8} className="inline-block mr-1" />
-                <p className="text-sm text-[0.6rem]">{job.postedBy.name}</p> */}
-        </div>
-        <div className="flex items-center text-gray-500">
-          <FaClock size={8} className="inline-block mr-1" />
-          <p className="text-xs text-[0.6rem]">{daysListed} days ago</p>
+ 
+        <p className="text-blue-800 text-xl font-semibold">£200</p>
+        <div className="flex  text-gray-500">
+          <div className="flex justify-center ">
+            <FaClock size={8} className="inline-block mr-1" />
+            <p className="text-xs text-[0.6rem]">{daysListed} days ago</p>
+          </div>
         </div>
       </div>
     </div>
