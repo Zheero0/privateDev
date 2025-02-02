@@ -35,19 +35,20 @@ export const Card = ({ job, daysListed }) => {
             {job.postedBy.displayName}
           </p>
         </div>
-        <p className="text-gray-600 mt-1 text-[0.7rem] w-full text-center px-1">
+        {/* <p className="text-gray-600 mt-1 text-[0.7rem] w-full text-center px-1">
           {truncate(job.description, 61)}
-        </p>
+        </p> */}
       </div>
       <div className="px-4 pb-2 flex justify-between items-center">
         <p className="text-blue-800 text-xl font-semibold">
           <span className="text-sm font-medium">£</span>{job.price}
         </p>
-        <div className="flex text-gray-500">
-          <div className="flex justify-center">
-            <FaClock size={8} className="inline-block mr-1" />
-            <p className="text-xs text-[0.6rem]">{daysListed} days ago</p>
+        <div className=" text-gray-500">
+          <div className="flex items-center space-x-1">
+            <FaClock size={12} className="text-gray-500" />
+            <p className="text-xs text-gray-500">{daysListed} days ago</p>
           </div>
+
         </div>
       </div>
     </div>
