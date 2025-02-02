@@ -9,11 +9,12 @@ export const Hero = () => {
     >
       <div className="text-center">
         <h1 className="text-4xl font-bold md:text-5xl">
-          Find Your Dream Job or Hire Top Talent
+          Hire Top Talent in Minutes
         </h1>
         <p className="text-xl mt-4 md:text-2xl">
-          Connect with leading companies and thriving startups.
+          Post jobs, review candidates, and hire the best
         </p>
+        <p className="text-xs italic">-- fast and easy --</p>
 
         <div className="mt-8">
           <Link
@@ -22,7 +23,10 @@ export const Hero = () => {
           >
             Post a Job
           </Link>
-          <Link href={"/search"} className="bg-transparent border border-blue-800 hover:bg-white hover:text-gray-800 text-black font-bold py-2 px-4 rounded">
+          <Link
+            href={"/search"}
+            className="bg-transparent border border-blue-800 hover:bg-white hover:text-gray-800 text-black font-bold py-2 px-4 rounded"
+          >
             Browse Jobs
           </Link>
         </div>
