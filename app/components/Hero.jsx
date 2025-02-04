@@ -10,13 +10,13 @@ export const Hero = () => {
   return (
     <div className="bg-cover bg-center bg-hero-pattern h-screen mx-auto w-screen flex items-center justify-center text-black">
       <div className="text-center w-full px-4">
-        <h1 className="text-4xl font-bold md:text-5xl">
+        <h1 className="text-3xl font-bold md:text-5xl">
           Hire Top Talent in Minutes
         </h1>
-        <p className="text-xl mt-4 md:text-2xl">
+        <p className="text-sm mt-4 md:text-2xl">
           Post jobs, review candidates, and hire the best
         </p>
-        <p className="text-xs italic mt-2">-- fast and easy --</p>
+        <p className="text-[9px] italic mt-2">-- fast and easy --</p>
 
           <div className="mt-8 max-w-2xl mx-auto relative">
             <div className="relative flex items-center">
