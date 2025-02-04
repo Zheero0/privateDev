@@ -61,7 +61,7 @@ export default function TestChatPage() {
   };
 
 return (
-  <div className="flex flex-col h-full p-4 mx-auto max-w-lg w-full">
+  <div className="flex flex-col h-full p-4  w-screen">
     {/* Chat messages */}
     <div className="flex-1  ">
       {messages.map((msg) => (
