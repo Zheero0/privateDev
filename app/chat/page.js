@@ -61,7 +61,7 @@ export default function TestChatPage() {
   };
 
 return (
-  <div className="flex flex-col h-full p-4  w-screen">
+  <div className="flex flex-col h-[95%] p-4  w-screen">
     {/* Chat messages */}
     <div className="flex-1  ">
       {messages.map((msg) => (
@@ -79,7 +79,7 @@ return (
     </div>
 
     {/* Message input */}
-    <form onSubmit={handleSendMessage} className="mt-4 flex mb-20">
+    <form onSubmit={handleSendMessage} className="mt-4 flex ">
       <input
         type="text"
         className="flex-1 p-2 border rounded-l"
