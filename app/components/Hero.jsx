@@ -32,7 +32,7 @@ export const Hero = () => {
         <div className="mt-6 flex justify-center gap-4">
           <Link
             href={"/post-job"}
-            className="bg-blue-800 hover:bg-blue-700 text-white font-bold py-3 px-5 rounded-full mr-4 transition-all duration-200 transform hover:scale-105"
+            className="bg-blue-800 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full mr-4 transition-all duration-200 transform hover:scale-105"
           >
             Post a Job
           </Link>
