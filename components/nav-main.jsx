@@ -43,8 +43,10 @@ export function NavMain({ items }) {
                   <CollapsibleTrigger asChild>
                     <SidebarMenuButton tooltip={item.title}>
                       {item.icon && <item.icon className="h-4 w-4" />}
-                      {/* Hide the text if the sidebar is minimized */}
-                      <span className={open ? "inline" : "hidden"}>
+                      {/* Show text always on mobile, conditionally on desktop */}
+                      <span
+                        className={`inline ${open ? "md:inline" : "md:hidden"}`}
+                      >
                         {item.title}
                       </span>
                       <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
@@ -56,7 +58,13 @@ export function NavMain({ items }) {
                         <SidebarMenuSubItem key={subItem.title}>
                           <SidebarMenuSubButton asChild>
                             <Link href={subItem.url}>
-                              <span>{subItem.title}</span>
+                              <span
+                                className={`inline ${
+                                  open ? "md:inline" : "md:hidden"
+                                }`}
+                              >
+                                {subItem.title}
+                              </span>
                             </Link>
                           </SidebarMenuSubButton>
                         </SidebarMenuSubItem>
@@ -74,8 +82,9 @@ export function NavMain({ items }) {
                   <Link href={item.url}>
                     <div className="flex items-center gap-2">
                       {item.icon && <item.icon className="h-4 w-4" />}
-                      {/* Conditionally display the text only when sidebar is open */}
-                      <span className={open ? "inline" : "hidden"}>
+                      <span
+                        className={`inline ${open ? "md:inline" : "md:hidden"}`}
+                      >
                         {item.title}
                       </span>
                     </div>
