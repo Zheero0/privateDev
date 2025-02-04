@@ -6,6 +6,8 @@ import { doc, setDoc, getDoc } from "firebase/firestore";
 import { db } from "@/firebase/firebase";
 import { logOut } from "@/firebase/auth";
 import Login from "../components/Login";
+import { useSearchParams } from "next/navigation";
+import { toast } from "sonner";
 
 
 export default function ProfilePage() {
@@ -22,7 +24,15 @@ export default function ProfilePage() {
   useEffect(() => {
     setIsClient(true); // ✅ Ensures we only render on client
   }, []);
+  //to trigger toast notification when user logs in
+  // const searchParams = useSearchParams();
 
+  // useEffect(() => {
+  //   // Check if the query parameter "loginSuccess" is set to "true"
+  //   if (searchParams.get("loginSuccess") === "true") {
+  //     toast.success("Login Successful!");
+  //   }
+  // }, [searchParams]);
   // ✅ Load user data from Firestore only after authentication state is available
   useEffect(() => {
     if (currentUser) {
@@ -88,7 +98,7 @@ export default function ProfilePage() {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container w-screen mx-auto px-4 py-8">
       {/* 🔥 Show loading spinner before rendering UI */}
       {loading ? (
         <div className="text-center">Loading...</div>

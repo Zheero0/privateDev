@@ -52,8 +52,8 @@ export default function PostJob() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
-      <div className="w-full max-w-lg bg-white p-8 rounded shadow-md">
+    <div className="min-h-screen flex items-center justify-center  p-4">
+      <div className="w-full max-w-lg bg-white p-8 rounded ">
         <h2 className="text-2xl font-bold mb-6">Post a Job</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Title */}

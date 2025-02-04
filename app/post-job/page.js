@@ -6,5 +6,9 @@ import Login from "../components/Login"; // Ensure this path is correct
 export default function PostJobPage() {
   const { currentUser } = useAuth();
 
-  return <>{currentUser ? <PostJob /> : <Login />}</>;
+  return (
+    <div className="flex justify-center items-center w-screen min-h-screen">
+      {currentUser ? <PostJob /> : <Login />}
+    </div>
+  );
 }

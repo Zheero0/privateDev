@@ -4,9 +4,13 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/context/authContext/auth";
 
+import { Toaster } from "sonner";
+
 import NavBar from "./components/Navbar"; // Correct for default exports
 import { Footer } from "./components/Footer";
 import Sidebar from "./components/Sidebar";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { AppSidebar } from "@/components/app-sidebar";
 
 // Load Inter font
 const inter = Inter({
@@ -27,15 +31,14 @@ export default function RootLayout({ children }) {
     <html lang="en" className={inter.variable}>
       <body className={`${inter.className} antialiased`}>
         <AuthProvider>
-          {/* 🚀 FIXED: Sidebar + Main Content in a Flexbox Layout */}
-          <div className="flex min-h-screen">
-            
-            <Sidebar />
-            <div className="flex-1 flex flex-col  ml-[9.5rem]">
-              <main className="flex-1 bg-white pl-5 pt-5">{children}</main>
-              {/* <Footer /> */}
-            </div>
-          </div>
+          <SidebarProvider>
+            <AppSidebar />
+            <main>
+              <SidebarTrigger />
+              {children}
+            </main>
+            <Toaster/>
+          </SidebarProvider>
         </AuthProvider>
       </body>
     </html>

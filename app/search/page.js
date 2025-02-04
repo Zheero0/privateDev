@@ -51,7 +51,7 @@ const searchPage = () => {
   };
 
   return (
-    <div className="flex flex-col   min-h-full  overflow-hidden">
+    <div className="flex flex-col   min-h-full  overflow-hidden ml-10">
       <div className="mt-5 w-full ">
         <Search />
 
