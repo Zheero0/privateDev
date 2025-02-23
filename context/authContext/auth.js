@@ -11,17 +11,29 @@ export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  // Default subscription status
+  const [isProUser, setIsProUser] = useState(false); // Set to false for default state
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
         setCurrentUser(user);
         await createUserDocument(user); // Ensure Firestore has the user's document
+
+        // Fetch the user's subscription status from Firestore
+        const userRef = doc(db, "users", user.uid);
+        const userSnap = await getDoc(userRef);
+        if (userSnap.exists()) {
+          const userData = userSnap.data();
+          setIsProUser(userData.isProUser || false); // Set isProUser based on Firestore data
+        }
       } else {
         setCurrentUser(null);
+        setIsProUser(false); // Reset to default when user logs out
       }
       setLoading(false);
     });
-    
+
     return unsubscribe;
   }, []);
 
@@ -38,7 +50,7 @@ export function AuthProvider({ children }) {
         name: user.displayName || "Anonymous",
         email: user.email,
         profileImage: user.photoURL || "",
-        isProUser: false, // Default user status
+        isProUser: false, // Default to false for new users
       });
     }
   };
@@ -65,6 +77,7 @@ export function AuthProvider({ children }) {
     currentUser,
     updateUserProfile,
     loading,
+    isProUser, // Expose the subscription status
   };
 
   return (

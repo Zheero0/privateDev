@@ -20,10 +20,9 @@ const inter = Inter({
   weight: ["400", "500", "600", "700"], // Adjust based on needs
 });
 
-
 export const metadata = {
   title: "Marketplace",
-  description: "Marketplace is a job markeplace application built with Next.js and Firebase.",
+  description: "Marketplace is a job markeplace for all your needs.",
 };
 
 export default function RootLayout({ children }) {
@@ -37,7 +36,7 @@ export default function RootLayout({ children }) {
               <SidebarTrigger />
               {children}
             </main>
-            <Toaster/>
+            <Toaster />
           </SidebarProvider>
         </AuthProvider>
       </body>

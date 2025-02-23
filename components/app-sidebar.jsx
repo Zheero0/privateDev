@@ -1,6 +1,5 @@
 "use client";
 
-
 import * as React from "react";
 import {
   AudioWaveform,
@@ -18,6 +17,7 @@ import {
   PieChart,
   Settings2,
   Search,
+  Sparkles,
 } from "lucide-react";
 
 import Link from "next/link";
@@ -48,7 +48,7 @@ const data = {
       icon: Search,
       items: [
         { title: "Find Job", url: "/search" },
-        { title: "Search Directory", url: "/directory" },
+        { title: "Directory", url: "/directory" },
         { title: "Saved Jobs", url: "/saved-jobs" },
       ],
     },
@@ -84,8 +84,8 @@ const data = {
 };
 
 export function AppSidebar({ ...props }) {
-  // Call useAuth to access the current user
-  const { currentUser } = useAuth();
+  // Call useAuth to access the current user and subscription status
+  const { currentUser, isProUser } = useAuth();
 
   // Prepare the user object to pass to NavUser
   const user = {
@@ -113,20 +113,20 @@ export function AppSidebar({ ...props }) {
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
         <Link href="/">
-        <svg
-          width="30"
-          height="30"
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M12 2L20 7V17L12 22L4 17V7L12 2Z"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
+          <svg
+            width="35"
+            height="35"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M12 2L20 7V17L12 22L4 17V7L12 2Z"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
           </svg>
           mkp
         </Link>
@@ -135,6 +135,28 @@ export function AppSidebar({ ...props }) {
         <NavMain items={data.navMain} />
         {/* <NavProjects projects={data.projects} /> */}
       </SidebarContent>
+
+      {/* Conditionally render the upgrade section based on isProUser */}
+      {!isProUser && (
+        <div className="px-4 py-3 mx-3 mb-4 rounded-lg bg-gradient-to-r from-white to-gray-200 shadow-md group-data-[collapsible=icon]:hidden">
+          <div className="mb-2">
+            <span className="flex items-center gap-1 text-sm font-medium text-gray-800">
+              <Sparkles className="h-4 w-4" />
+              Upgrade to Pro
+            </span>
+            <p className="text-xs text-gray-600">
+              Get access to all premium features
+            </p>
+          </div>
+          <Link
+            href="/pricing"
+            className="block w-full py-2 text-center text-xs font-medium text-white bg-blue-500 hover:bg-blue-400 rounded-md transition-colors"
+          >
+            Upgrade Now
+          </Link>
+        </div>
+      )}
+
       <SidebarFooter>
         <NavUser user={user} />
       </SidebarFooter>
