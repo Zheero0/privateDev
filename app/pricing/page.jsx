@@ -107,12 +107,12 @@ const PricingPage = () => {
                 </div>
               )}
               {plan.title === "Pro Annual" && (
-                <div className="absolute top-0 right-0 bg-yellow-500 text-white px-3 py-1 text-xs font-bold uppercase rounded-tr-md rounded-bl-lg">
+                <div className="absolute top-0 right-0 bg-yellow-500 text-white px-4 py-2 text-xs font-bold uppercase rounded-tr-md rounded-bl-lg">
                   Best Value
                 </div>
               )}
-              <h2 className="text-2xl font-medium mb-4">{plan.title}</h2>
-              <div className="mb-6">
+              <h2 className="text-2xl font-medium mb-1">{plan.title}</h2>
+              <div className="mb-8">
                 <span className="text-4xl font-extrabold">{plan.price}</span>
                 <span className="text-xl">{plan.period}</span>
               </div>

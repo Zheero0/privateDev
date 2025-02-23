@@ -18,6 +18,7 @@ import {
   Settings2,
   Search,
   Sparkles,
+  Building,
 } from "lucide-react";
 
 import Link from "next/link";
@@ -37,14 +38,14 @@ import { useAuth } from "@/context/authContext/auth";
 // Sample data for teams, navMain, and projects.
 const data = {
   navMain: [
-    {
-      title: "Dashboard",
-      url: "/dashboard",
-      icon: LayoutDashboard,
-    },
+    // {
+    //   title: "Dashboard",
+    //   url: "/dashboard",
+    //   icon: LayoutDashboard,
+    // },
     {
       title: "Search",
-      url: "#",
+      url: "/search",
       icon: Search,
       items: [
         { title: "Find Job", url: "/search" },
@@ -62,6 +63,11 @@ const data = {
       title: "Post Job",
       url: "/post-job",
       icon: PenSquare,
+    },
+    {
+      title: "Directory",
+      url: "/directory",
+      icon: Building,
     },
   ],
   projects: [

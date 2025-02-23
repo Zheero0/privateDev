@@ -54,7 +54,8 @@ const SidebarProvider = React.forwardRef(
 
     // This is the internal state of the sidebar.
     // We use openProp and setOpenProp for control from outside the component.
-    const [_open, _setOpen] = React.useState(defaultOpen);
+    const initialOpen = isMobile ? defaultOpen : true;
+    const [_open, _setOpen] = React.useState(initialOpen);
     const open = openProp ?? _open;
     const setOpen = React.useCallback(
       (value) => {
@@ -232,7 +233,7 @@ Sidebar.displayName = "Sidebar";
 
 const SidebarTrigger = React.forwardRef(
   ({ className, onClick, ...props }, ref) => {
-    const { toggleSidebar } = useSidebar();
+    const { toggleSidebar, isMobile } = useSidebar();
 
     return (
       <Button
@@ -241,8 +242,10 @@ const SidebarTrigger = React.forwardRef(
         variant="ghost"
         sizepx={30}
         className={cn(
-          "h-10 w-10  rounded-md transition-all transform hover:scale-x-125 hover:bg-transparent",
-          className
+          "h-10 w-10 rounded-md transition-all transform hover:scale-x-125 hover:bg-transparent",
+          className,
+          // Make the button transparent on desktop sizes
+          !isMobile ? "bg-transparent text-transparent" : ""
         )}
         onClick={(event) => {
           onClick?.(event);
