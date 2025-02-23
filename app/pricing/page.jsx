@@ -17,9 +17,9 @@ const pricingPlans = [
     period: "/mo",
     features: [
       "Enhanced profile visibility for more opportunities",
-      "Access and apply to job listings not available to free users",
+      "Access and apply to job listings",
       "Priority support from our team",
-      "Exclusive tools to manage jobs more efficiently",
+      "Exclusive tools to manage your jobs",
     ],
     buttonText: "Select Pro",
   },
@@ -29,7 +29,7 @@ const pricingPlans = [
     period: "/yr",
     features: [
       "Enhanced profile visibility for more opportunities",
-      "Access and apply to job listings not available to free users",
+      "Access and apply to job listings",
       "Priority support from our team",
       "Exclusive tools to manage jobs more efficiently",
       "Save money with an annual subscription",
@@ -46,38 +46,32 @@ const PricingPage = () => {
   return (
     <div className="min-h-screen py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="text-4xl font-extrabold text-center mb-12">
-          Pricing Plans
-        </h1>
-        <div className="grid gap-8 grid-cols-1 md:grid-cols-3">
+        <h1 className="text-4xl font-extrabold text-center mb-12">Pricing</h1>
+        <div className="grid gap-14 grid-cols-1 md:grid-cols-3">
           {pricingPlans.map((plan) => (
             <div
               key={plan.title}
               className={`bg-white border ${
                 plan.title === selectedPlanTitle
-                  ? "scale-105 shadow-lg border-blue-500"
+                  ? "lg:scale-110 shadow-lg "
                   : "border-blue-200 shadow-md"
-              } rounded-lg p-8 flex flex-col relative transition transform duration-300`}
+              } rounded-lg p-6 flex flex-col relative transition transform duration-300`}
             >
               {plan.title === "Pro" && (
-                <div className="absolute top-0 right-0 bg-yellow-500 text-white px-3 py-1 text-xs font-bold uppercase rounded-bl-lg">
+                <div className="absolute top-0 right-0 bg-yellow-500 text-white px-3 py-1 text-xs font-bold uppercase rounded-tr-md rounded-bl-lg">
                   Best Seller
                 </div>
               )}
-              <h2 className="text-2xl font-medium mb-4">
-                {plan.title}
-              </h2>
+              <h2 className="text-2xl font-medium mb-4">{plan.title}</h2>
               <div className="mb-6">
-                <span className="text-4xl font-extrabold">
-                  {plan.price}
-                </span>
+                <span className="text-4xl font-extrabold">{plan.price}</span>
                 <span className="text-xl">{plan.period}</span>
               </div>
               <ul className="mb-6 space-y-3 flex-1">
                 {plan.features.map((feature, index) => (
                   <li key={index} className="flex items-start">
-                    <CheckCircle className="w-6 h-6 text-green-500 mr-2 flex-shrink-0" />
-                    <span className="text-gray-700">{feature}</span>
+                    <CheckCircle className="w-4 h-4 text-blue-500 mr-2 flex-shrink-0" />
+                    <span className="text-gray-700 text-sm">{feature}</span>
                   </li>
                 ))}
               </ul>

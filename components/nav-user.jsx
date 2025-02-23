@@ -32,7 +32,7 @@ import { useAuth } from "@/context/authContext/auth";
 
 export function NavUser({ user }) {
   const { isMobile } = useSidebar();
-  const { currentUser } = useAuth();
+  const { currentUser, isProUser } = useAuth();
 
   return (
     <SidebarMenu>
@@ -82,13 +82,14 @@ export function NavUser({ user }) {
               // Render these dropdown items if user is authenticated.
               <>
                 <DropdownMenuGroup>
-                  <DropdownMenuItem>
-                    <Sparkles />
-                    Upgrade to Pro
-                  </DropdownMenuItem>
-                </DropdownMenuGroup>
-                <DropdownMenuSeparator />
-                <DropdownMenuGroup>
+                  {!isProUser && (
+                    <DropdownMenuItem>
+                      <Link href="/pricing" className="flex items-center gap-2">
+                        <Sparkles />
+                        Upgrade to Pro
+                      </Link>
+                    </DropdownMenuItem>
+                  )}
                   <DropdownMenuItem asChild>
                     <Link href="/profile">
                       <div className="flex items-center gap-2">
