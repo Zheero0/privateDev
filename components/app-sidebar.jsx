@@ -119,6 +119,7 @@ export function AppSidebar({ ...props }) {
             viewBox="0 0 24 24"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
+            className="text-blue-500"
           >
             <path
               d="M12 2L20 7V17L12 22L4 17V7L12 2Z"
@@ -128,7 +129,7 @@ export function AppSidebar({ ...props }) {
               strokeLinejoin="round"
             />
           </svg>
-          mkp
+          <p className="`">mkp</p>
         </Link>
       </SidebarHeader>
       <SidebarContent>

@@ -1,7 +1,13 @@
 "use client";
 import { createContext, useContext, useEffect, useState } from "react";
 import { getAuth, onAuthStateChanged, updateProfile } from "firebase/auth";
-import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
+import {
+  getFirestore,
+  doc,
+  setDoc,
+  getDoc,
+  updateDoc,
+} from "firebase/firestore";
 import { auth, db } from "@/firebase/firebase"; // Ensure you import Firestore from your config
 
 const AuthContext = createContext();
@@ -14,6 +20,34 @@ export function AuthProvider({ children }) {
   // Default subscription status
   const [isProUser, setIsProUser] = useState(false); // Set to false for default state
 
+  // Function to toggle pro user status
+  const updateProStatus = async (userId, planType = "monthly") => {
+    try {
+      // Get current user data first
+      const userRef = doc(db, "users", userId);
+      const userSnap = await getDoc(userRef);
+      const userData = userSnap.exists() ? userSnap.data() : {};
+
+      // Toggle the current status and update plan type
+      const newProStatus = !userData.isProUser;
+
+      // Update in Firestore with plan type
+      await updateDoc(userRef, {
+        isProUser: newProStatus,
+        updatedAt: new Date().toISOString(),
+      });
+
+      // Update both states
+      setIsProUser(newProStatus);
+
+      return true;
+    } catch (error) {
+      console.error("Error updating pro status:", error);
+      alert("Error toggling pro status: " + error.message);
+      return false;
+    }
+  };
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
@@ -25,11 +59,13 @@ export function AuthProvider({ children }) {
         const userSnap = await getDoc(userRef);
         if (userSnap.exists()) {
           const userData = userSnap.data();
-          setIsProUser(userData.isProUser || false); // Set isProUser based on Firestore data
+          setIsProUser(userData.isProUser || false);
+
         }
       } else {
         setCurrentUser(null);
         setIsProUser(false); // Reset to default when user logs out
+
       }
       setLoading(false);
     });
@@ -78,6 +114,7 @@ export function AuthProvider({ children }) {
     updateUserProfile,
     loading,
     isProUser, // Expose the subscription status
+    updateProStatus, // Export the function
   };
 
   return (

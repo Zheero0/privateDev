@@ -9,7 +9,6 @@ import Login from "../components/Login";
 import { useSearchParams } from "next/navigation";
 import { toast } from "sonner";
 
-
 export default function ProfilePage() {
   const { currentUser } = useAuth();
   const [displayName, setDisplayName] = useState("");

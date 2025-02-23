@@ -2,6 +2,7 @@
 import React from "react";
 import { CheckCircle } from "lucide-react";
 import { useAuth } from "@/context/authContext/auth";
+import { toast } from "sonner";
 
 const pricingPlans = [
   {
@@ -39,9 +40,52 @@ const pricingPlans = [
 ];
 
 const PricingPage = () => {
-  const { currentUser, isProUser } = useAuth();
-  // Determine the selected plan based on the user's subscription status
-  const selectedPlanTitle = currentUser ? (isProUser ? "Pro" : "Basic") : ""; 
+  const { currentUser, isProUser, planType, updateProStatus } = useAuth();
+
+  const getCurrentPlanTitle = (isProUser, planType) => {
+    if (!isProUser) return "Basic";
+    return planType === "annual" ? "Pro Annual" : "Pro";
+  };
+
+  const selectedPlanTitle = currentUser
+    ? getCurrentPlanTitle(isProUser, planType)
+    : "";
+
+  const handlePlanSelect = async (planTitle) => {
+    if (!currentUser) {
+      toast.error("Please login to select a plan");
+      return;
+    }
+
+    try {
+      if (planTitle === "Pro") {
+        const success = await updateProStatus(currentUser.uid, "monthly");
+        if (success) {
+          toast.success(
+            `Successfully ${
+              isProUser ? "switched to" : "upgraded to"
+            } Pro Monthly!`
+          );
+        }
+      } else if (planTitle === "Pro Annual") {
+        const success = await updateProStatus(currentUser.uid, "annual");
+        if (success) {
+          toast.success(
+            `Successfully ${
+              isProUser ? "switched to" : "upgraded to"
+            } Pro Annual!`
+          );
+        }
+      } else if (planTitle === "Basic" && isProUser) {
+        const success = await updateProStatus(currentUser.uid);
+        if (success) {
+          toast.success("Successfully downgraded to Basic plan");
+        }
+      }
+    } catch (error) {
+      toast.error("Failed to update plan");
+    }
+  };
 
   return (
     <div className="min-h-screen py-12">
@@ -53,13 +97,18 @@ const PricingPage = () => {
               key={plan.title}
               className={`bg-white border ${
                 plan.title === selectedPlanTitle
-                  ? "lg:scale-110 shadow-lg "
+                  ? "lg:scale-110 shadow-lg"
                   : "border-blue-200 shadow-md"
               } rounded-lg p-6 flex flex-col relative transition transform duration-300`}
             >
               {plan.title === "Pro" && (
-                <div className="absolute top-0 right-0 bg-yellow-500 text-white px-3 py-1 text-xs font-bold uppercase rounded-tr-md rounded-bl-lg">
+                <div className="absolute top-0 right-0 bg-blue-500 text-white px-4 py-2 text-xs font-bold uppercase rounded-tr-md rounded-bl-lg">
                   Best Seller
+                </div>
+              )}
+              {plan.title === "Pro Annual" && (
+                <div className="absolute top-0 right-0 bg-yellow-500 text-white px-3 py-1 text-xs font-bold uppercase rounded-tr-md rounded-bl-lg">
+                  Best Value
                 </div>
               )}
               <h2 className="text-2xl font-medium mb-4">{plan.title}</h2>
@@ -76,15 +125,15 @@ const PricingPage = () => {
                 ))}
               </ul>
               <button
+                onClick={() => handlePlanSelect(plan.title)}
                 className={`w-full py-2 px-4 rounded-md transition-colors ${
                   plan.title === selectedPlanTitle
                     ? "bg-blue-600 text-white hover:bg-blue-700"
-                    : "bg-gray-300 text-gray-700 opacity-50 cursor-not-allowed"
+                    : "bg-blue-500 text-white hover:bg-blue-600"
                 }`}
-                disabled={plan.title !== selectedPlanTitle} // Disable button if not selected
               >
                 {plan.title === selectedPlanTitle
-                  ? "Selected Plan"
+                  ? "Current Plan"
                   : plan.buttonText}
               </button>
             </div>

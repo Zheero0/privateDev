@@ -114,15 +114,22 @@ export default function Sidebar() {
 
 // Sidebar Item Component
 function SidebarItem({ href, icon, label, isOpen }) {
-return (
+  return (
     <li>
-        <Link
-            href={href}
-            className="flex items-center space-x-2 p-3 rounded-lg transition hover:scale-105 hover:text-gray-200 duration-[0.5s] group"
-        >
-            <span className="text-gray-400 text-xl group-hover:text-gray-200"> {icon}</span>
-            {isOpen && <span className="text-sm font-semibold text-gray-400 group-hover:text-gray-200">{label}</span>}
-        </Link>
+      <Link
+        href={href}
+        className="flex items-center space-x-2 p-3 rounded-lg transition hover:scale-105 hover:text-gray-200 duration-[0.5s] group"
+      >
+        <span className="text-gray-400 text-xl group-hover:text-gray-200">
+          {" "}
+          {icon}
+        </span>
+        {isOpen && (
+          <span className="text-sm font-semibold text-gray-400 group-hover:text-gray-200">
+            {label}
+          </span>
+        )}
+      </Link>
     </li>
-);
+  );
 }
