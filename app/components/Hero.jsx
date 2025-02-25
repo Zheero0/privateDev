@@ -9,19 +9,28 @@ import {
   SelectItem,
 } from "@/components/ui/select";
 import { Search } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export const Hero = () => {
+  const router = useRouter();
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    router.push("/search");
+
+  };
+
   return (
     <div className="h-screen flex w-full p-[5vw] ml-[6rem]">
       {/* Left Column: Form */}
-      <div className="w-full md:w-1/2 flex items-center justify-center bg-white p-1 py-3">
-        <div className="w-full max-w-lg">
+      <div className="w-full md:w-1/2 flex items-center  bg-white p-1 py-3">
+        <div className="w-full ">
           <h1 className="text-5xl font-bold text-gray-900 mb-4 leading-relaxed tracking-wide">
             Hire top talent anywhere
           </h1>
           <div className="flex  space-x-8 mt-4 w-full">
             <div className="flex flex-col items-center">
-              <button className="flex items-center justify-center w-12 h-12 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition">
+              <button className="flex items-center justify-center w-12 h-12 bg-blue-600 text-white rounded-lg hover:bg-blue-500 transition">
                 <Search size={24} />
               </button>
               <span className="mt-2 text-sm font-medium text-gray-700">
@@ -49,7 +58,7 @@ export const Hero = () => {
               </span>
             </div>
           </div>
-          <form className="space-y-4 mt-6">
+          <form className="space-y-4 mt-6" onSubmit={handleSearch}>
             <div>
               <Input
                 id="location"
@@ -121,7 +130,7 @@ export const Hero = () => {
       </div>
 
       {/* Right Column: Map */}
-      <div className="w-full md:w-full py-[9rem] top-[5rem] flex items-center justify-center  ">
+      <div className="w-full md:w-full py-[5rem] top-[5rem] flex items-center justify-center  ">
         <div className="w-full h-full max-w-md max-h-md  rounded-lg overflow-hidden shadow-md">
           <iframe
             title="Map"

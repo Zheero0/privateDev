@@ -14,7 +14,7 @@ const pricingPlans = [
   },
   {
     title: "Pro",
-    price: "$4.99",
+    price: "£4.99",
     period: "/mo",
     features: [
       "Enhanced profile visibility for more opportunities",
@@ -26,7 +26,7 @@ const pricingPlans = [
   },
   {
     title: "Pro Annual",
-    price: "$49.99",
+    price: "£49.99",
     period: "/yr",
     features: [
       "Enhanced profile visibility for more opportunities",

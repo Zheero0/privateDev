@@ -19,6 +19,7 @@ import {
   Search,
   Sparkles,
   Building,
+  Bookmark,
 } from "lucide-react";
 
 import Link from "next/link";
@@ -44,30 +45,30 @@ const data = {
     //   icon: LayoutDashboard,
     // },
     {
-      title: "Search",
+      title: "Search Jobs",
       url: "/search",
       icon: Search,
-      items: [
-        { title: "Find Job", url: "/search" },
-        { title: "Directory", url: "/directory" },
-        { title: "Saved Jobs", url: "/saved-jobs" },
-      ],
     },
     {
       title: "Chat",
       url: "/chat",
       icon: MessagesSquare,
     },
-
+    {
+      title: "Directory",
+      url: "/directory",
+      icon: Building,
+    },
     {
       title: "Post Job",
       url: "/post-job",
       icon: PenSquare,
     },
+
     {
-      title: "Directory",
-      url: "/directory",
-      icon: Building,
+      title: "Saved Jobs",
+      url: "/saved-jobs",
+      icon: Bookmark,
     },
   ],
   projects: [
@@ -135,7 +136,7 @@ export function AppSidebar({ ...props }) {
               strokeLinejoin="round"
             />
           </svg>
-          <p className="`">mkp</p>
+          <p className="">mkp</p>
         </Link>
       </SidebarHeader>
       <SidebarContent>

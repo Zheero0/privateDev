@@ -163,14 +163,14 @@ export default function ProfilePage() {
               </h2>
               <div className="mb-6 text-center">
                 <span className="text-base text-gray-600">
-                  Subscription Status:
+                  Subscription:
                 </span>
                 <span
                   className={`ml-2 font-semibold ${
                     isProUser ? "text-blue-500" : "text-gray-800"
                   }`}
                 >
-                  {isProUser ? "Pro" : "Basic"}
+                  {isProUser ? "Pro Plan" : "Basic"}
                 </span>
               </div>
               {/* New Profile Photo Section */}
@@ -278,7 +278,7 @@ export default function ProfilePage() {
         </div>
 
         {/* Right Column: Jobs Posted by the User */}
-        <div className="flex flex-col">
+        {/* <div className="flex flex-col">
           <div className=" p-8  w-full md:w-1/2">
             <div className="w-full px-4 h-[45vh]">
               <div className="flex items-center justify-between mb-4 ml-4">
@@ -307,9 +307,11 @@ export default function ProfilePage() {
                 )}
               </div>
             </div>
-          </div>
+          </div> */}
+
+
           {/* Right Column: Jobs Posted by the User */}
-          <div className=" p-8  w-full md:w-1/2">
+          {/* <div className=" p-8  w-full md:w-1/2">
             <div className="w-full px-4 h-[45vh]">
               <div className="flex items-center justify-between mb-4 ml-4">
                 <h2 className="text-2xl font-bold text-gray-800">
@@ -338,7 +340,7 @@ export default function ProfilePage() {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );
