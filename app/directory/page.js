@@ -4,7 +4,7 @@ export default function DirectoryPage() {
       <h1 className="text-2xl font-bold mb-4">Directory</h1>
       <div className="w-full max-w-2xl bg-gray-100 rounded-lg p-6">
         <p className="text-gray-600 text-center">
-          Ccoming soon...
+          Coming soon...
         </p>
       </div>
     </div>

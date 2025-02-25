@@ -151,7 +151,7 @@ export default function ProfilePage() {
     <div className="min-h-screen w-[100vw] px-4 py-8">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row space-y-8 md:space-y-0 md:space-x-8">
         {/* Left Column: Profile Form */}
-        <div className="w-full md:w-1/2 flex justify-start">
+        <div className="w-full  flex items-center justify-start">
           {loading ? (
             <div className="text-center text-gray-700 text-lg">Loading...</div>
           ) : !currentUser ? (
