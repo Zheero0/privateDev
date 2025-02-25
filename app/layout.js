@@ -8,7 +8,7 @@ import { Toaster } from "sonner";
 
 import NavBar from "./components/Navbar"; // Correct for default exports
 import { Footer } from "./components/Footer";
-import Sidebar from "./components/Sidebar";
+
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
 
@@ -32,8 +32,11 @@ export default function RootLayout({ children }) {
         <AuthProvider>
           <SidebarProvider>
             <AppSidebar />
-            <main>
-              <SidebarTrigger />
+            <main className="w-[calc(100%-16rem)]">
+              <div className="w-full overflow-x-hidden md:hidden flex">
+                <SidebarTrigger />
+              </div>
+
               {children}
             </main>
             <Toaster />

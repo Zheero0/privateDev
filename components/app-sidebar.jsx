@@ -97,7 +97,7 @@ export function AppSidebar({ ...props }) {
   const user = {
     name: currentUser?.displayName || "Guest",
     email: currentUser?.email || "No Email",
-    avatar: currentUser?.photoURL || (
+    avatar: currentUser?.displayImage || (
       <svg
         xmlns="http://www.w3.org/2000/svg"
         className="h-4 w-4 text-gray-500"

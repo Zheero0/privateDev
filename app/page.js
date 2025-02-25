@@ -1,150 +1,71 @@
 "use client";
-import { useState } from "react";
-import { signInWithGoogle, logOut } from "@/firebase/auth";
-import { useAuth } from "@/context/authContext/auth";
+import React, { useState, useEffect } from "react";
+import { collection, getDocs } from "firebase/firestore";
 import { db } from "@/firebase/firebase";
-import { collection, addDoc } from "firebase/firestore";
 import { Hero } from "./components/Hero";
 import Testimonials from "./components/Testimonial";
+import { Card } from "./components/Card";
+import Link from "next/link";
+import { FaArrowRight } from "react-icons/fa";
 
 export default function Home() {
-  const { userLoggedIn, currentUser } = useAuth();
-  const [isSigningIn, setIsSigningIn] = useState(false);
+  const [jobs, setJobs] = useState([]);
 
-  const [jobName, setJobName] = useState("");
-  const [location, setLocation] = useState("");
-  const [price, setPrice] = useState("");
-
-  //add job to database
-  const addJob = async () => {
-    if (!jobName || !location || !price) {
-      alert("Please fill in all fields.");
-      return;
+  useEffect(() => {
+    async function fetchJobs() {
+      try {
+        const querySnapshot = await getDocs(collection(db, "jobs"));
+        const jobListings = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setJobs(jobListings);
+      } catch (error) {
+        console.error("Error fetching jobs:", error);
+      }
     }
-
-    try {
-      const docRef = await addDoc(collection(db, "jobs"), {
-        jobName: jobName,
-        price: price,
-        location: location,
-      });
-      alert("Document written with ID: " + docRef.id);
-      console.log(jobName, location, price);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  //submit job form
-  const handleJobSubmit = async (e) => {
-    e.preventDefault();
-
-    if (!jobName || !location || !price) {
-      alert("Please fill in all fields.");
-      return;
-    }
-
-    try {
-      const docRef = await addDoc(collection(db, "jobListings"), {
-        jobName: jobName,
-        price: price,
-        location: location,
-      });
-      alert("Document written with ID: " + docRef.id);
-      console.log(jobName, location, price);
-    } catch (error) {
-      alert("Error adding document: " + error);
-      console.log(error);
-    }
-    console.log("job submitted");
-  };
-
-  // //sign in with google
-  // const googleSignIn = async (e) => {
-  //   e.preventDefault();
-
-  //   if (!isSigningIn) {
-  //     setIsSigningIn(true);
-
-  //     try {
-  //       await signInWithGoogle();
-  //       setIsSigningIn(false); // Reset state after success
-  //     } catch (err) {
-  //       console.error("Google Sign-In Error:", err);
-  //       setIsSigningIn(false); // Reset state after error
-  //     }
-  //   }
-  // };
-
-  // // if(userLoggedIn || !userLoggedIn){
-  // //   console.log(currentUser);
-
-  // // }
-  // const handleSignOut = async () => {
-  //   try {
-  //     await logOut();
-  //     console.log("User signed out successfully.");
-  //   } catch (error) {
-  //     console.error("Error signing out:", error);
-  //   }
-  // };
+    fetchJobs();
+  }, []);
 
   return (
-    <div className="flex flex-col">
+    <div className="w-full overflow-x-hidden flex flex-col space-y-12 justify-center items-center">
       <Hero />
+      <div className="w-full max-w-7xl mx-auto px-4 h-[55vh]">
+        {/* Header for Recent Jobs */}
+        <div className="flex items-center justify-between mb-4 ml-4">
+          <h2 className="text-2xl font-bold text-gray-800">Recent Jobs</h2>
+          <Link href="/search" className="flex items-center hover:underline">
+            <span className="text-sm font-medium">View All</span>
+            <FaArrowRight className="ml-1" size={16} />
+          </Link>
+        </div>
+
+        {/* Job Listings Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 ml-4">
+          {jobs.slice(0, 4).map((job) => (
+            <Card key={job.id} job={job} daysListed={job.daysListed || 0} />
+          ))}
+        </div>
+      </div>
+      <div className="w-full max-w-7xl mx-auto px-4 h-[55vh]">
+        {/* Header for Featured Jobs */}
+        <div className="flex items-center justify-between mb-4 ml-4">
+          <h2 className="text-2xl font-bold text-gray-800">Featured Jobs</h2>
+          <Link href="/search" className="flex items-center hover:underline">
+            <span className="text-sm font-medium">View All</span>
+            <FaArrowRight className="ml-1" size={16} />
+          </Link>
+        </div>
+
+        {/* Job Listings Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 ml-4">
+          {jobs.slice(4, 7).map((job) => (
+            <Card key={job.id} job={job} daysListed={job.daysListed || 0} />
+          ))}
+        </div>
+      </div>
+
       <Testimonials />
-      {/* <button
-        className="bg-green-500 px-4 py-2 text-white rounded"
-        onClick={googleSignIn}
-        disabled={isSigningIn} // Disable button while signing in
-      >
-        {isSigningIn ? "Signing in..." : "Sign in with Google"}
-      </button>
-      <div>{userLoggedIn ? "logged in " : " logged out"}</div>
-      <button onClick={handleSignOut} className="bg-red-500">
-        sign out
-      </button> */}
-      {/* <button onClick={addJob} className="bg-blue-500">
-        Add Job
-      </button>
-      <form onSubmit={handleJobSubmit} className="flex flex-col">
-        <input
-          type="text"
-          placeholder="Job Name"
-          value={jobName}
-          onChange={(e) => {
-            setJobName(e.target.value);
-            console.log(e.target.value);
-          }}
-        />
-        <input
-          type="text"
-          placeholder="Location"
-          value={location}
-          onChange={(e) => {
-            setLocation(e.target.value);
-            console.log(e.target.value);
-          }}
-        />
-        <input
-          type="text"
-          placeholder="Price"
-          value={price}
-          onChange={(e) => {
-            setPrice(e.target.value);
-            console.log(e.target.value);
-          }}
-        />
-
-        <button type="submit">Submit</button>
-      </form> */}
-
-      {/* <form>
-        <input type="text" placeholder="Job Name" />
-        <input type="text" placeholder="Location" />
-        <input type="text" placeholder="Price" />
-        <button type="submit">Submit</button>
-      </form> */}
     </div>
   );
 }

@@ -52,10 +52,16 @@ export default function PostJob() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center  p-4">
-      <div className="w-full max-w-lg bg-white p-8 rounded ">
-        <h2 className="text-2xl font-bold mb-6">Post a Job</h2>
-        <form onSubmit={handleSubmit} className="space-y-4">
+    <div className="max-h-screen w-full flex items-center  ml-[14rem] p-6">
+      <div className="w-full max-w-3xl  p-10 rounded-xl">
+        <h2 className="text-3xl font-bold text-center  mb-8">
+          Post a Job
+        </h2>
+        
+        <form
+          onSubmit={handleSubmit}
+          className="grid grid-cols-1 md:grid-cols-2 gap-6"
+        >
           {/* Title */}
           <div>
             <label
@@ -69,29 +75,10 @@ export default function PostJob() {
               id="title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              placeholder="Job title"
-              className="mt-1 block w-full border border-gray-300 rounded-md p-2 shadow-sm focus:ring-blue-500 focus:border-blue-500"
+              placeholder="Enter job title"
+              className="mt-2 block w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
               required
             />
-          </div>
-
-          {/* Description */}
-          <div>
-            <label
-              htmlFor="description"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Description
-            </label>
-            <textarea
-              id="description"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              placeholder="Job description"
-              className="mt-1 block w-full border border-gray-300 rounded-md p-2 shadow-sm focus:ring-blue-500 focus:border-blue-500"
-              rows="4"
-              required
-            ></textarea>
           </div>
 
           {/* Price */}
@@ -107,52 +94,71 @@ export default function PostJob() {
               id="price"
               value={price}
               onChange={(e) => setPrice(e.target.value)}
-              placeholder="Job price"
-              className="mt-1 block w-full border border-gray-300 rounded-md p-2 shadow-sm focus:ring-blue-500 focus:border-blue-500"
+              placeholder="Enter job price"
+              className="mt-2 block w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
               required
             />
           </div>
 
-          {/* Location: City and Area */}
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label
-                htmlFor="city"
-                className="block text-sm font-medium text-gray-700"
-              >
-                City
-              </label>
-              <input
-                type="text"
-                id="city"
-                value={city}
-                onChange={(e) => setCity(e.target.value)}
-                placeholder="City"
-                className="mt-1 block w-full border border-gray-300 rounded-md p-2 shadow-sm focus:ring-blue-500 focus:border-blue-500"
-                required
-              />
-            </div>
-            <div>
-              <label
-                htmlFor="area"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Area
-              </label>
-              <input
-                type="text"
-                id="area"
-                value={area}
-                onChange={(e) => setArea(e.target.value)}
-                placeholder="Area"
-                className="mt-1 block w-full border border-gray-300 rounded-md p-2 shadow-sm focus:ring-blue-500 focus:border-blue-500"
-                required
-              />
-            </div>
+          {/* Description (full width) */}
+          <div className="md:col-span-2">
+            <label
+              htmlFor="description"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Description
+            </label>
+            <textarea
+              id="description"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              placeholder="Enter job description"
+              className="mt-2 block w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+              rows="4"
+              required
+            ></textarea>
           </div>
 
-          {/* Image URL */}
+          {/* City */}
           <div>
+            <label
+              htmlFor="city"
+              className="block text-sm font-medium text-gray-700"
+            >
+              City
+            </label>
+            <input
+              type="text"
+              id="city"
+              value={city}
+              onChange={(e) => setCity(e.target.value)}
+              placeholder="Enter city"
+              className="mt-2 block w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+              required
+            />
+          </div>
+
+          {/* Area */}
+          <div>
+            <label
+              htmlFor="area"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Area
+            </label>
+            <input
+              type="text"
+              id="area"
+              value={area}
+              onChange={(e) => setArea(e.target.value)}
+              placeholder="Enter area"
+              className="mt-2 block w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+              required
+            />
+          </div>
+
+          {/* Image URL (full width) */}
+          <div className="md:col-span-2">
             <label
               htmlFor="imageURL"
               className="block text-sm font-medium text-gray-700"
@@ -164,17 +170,20 @@ export default function PostJob() {
               id="imageURL"
               value={imageURL}
               onChange={(e) => setImageURL(e.target.value)}
-              placeholder="Dont upload image, not setup"
-              className="mt-1 block w-full border border-gray-300 rounded-md p-2 shadow-sm focus:ring-blue-500 focus:border-blue-500"
+              placeholder="Image URL (optional)"
+              className="mt-2 block w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
             />
           </div>
 
-          <button
-            type="submit"
-            className="w-full py-2 px-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-md transition-colors"
-          >
-            Post Job
-          </button>
+          {/* Submit Button (full width) */}
+          <div className="md:col-span-2">
+            <button
+              type="submit"
+              className="w-full py-3 px-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition duration-200"
+            >
+              Post Job
+            </button>
+          </div>
         </form>
       </div>
     </div>

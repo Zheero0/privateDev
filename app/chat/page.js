@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useEffect, useState, useRef } from "react";
 import { useAuth } from "@/context/authContext/auth";
 import { db } from "@/firebase/firebase";
@@ -13,14 +12,19 @@ import {
   where,
   doc,
   updateDoc,
+  getDocs,
   getDoc,
 } from "firebase/firestore";
-import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import ProFeatureNotice from "@/app/components/ProFeatureNotice";
 
 export default function ChatPage() {
   const { currentUser } = useAuth();
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const otherUserUid = searchParams.get("uid");
+
   const [conversations, setConversations] = useState([]);
   const [selectedChat, setSelectedChat] = useState(null);
   const [messages, setMessages] = useState([]);
@@ -29,7 +33,6 @@ export default function ChatPage() {
   const [otherUserLocation, setOtherUserLocation] = useState("");
   const [showTimestamp, setShowTimestamp] = useState({});
 
-  // Ref for scrolling to bottom
   const messagesEndRef = useRef(null);
 
   const scrollToBottom = () => {
@@ -43,13 +46,11 @@ export default function ChatPage() {
   // Fetch conversations for the current user
   useEffect(() => {
     if (!currentUser) return;
-
     const convosQuery = query(
       collection(db, "conversations"),
       where("participants", "array-contains", currentUser.uid),
       orderBy("lastMessageTimestamp", "desc")
     );
-
     const unsubscribe = onSnapshot(convosQuery, (snapshot) => {
       const convos = snapshot.docs.map((doc) => ({
         id: doc.id,
@@ -57,14 +58,42 @@ export default function ChatPage() {
       }));
       setConversations(convos);
     });
-
     return () => unsubscribe();
   }, [currentUser]);
+
+  // If a "uid" query parameter exists, try to select a conversation with that user
+  useEffect(() => {
+    if (!currentUser || !otherUserUid) return;
+    // Try to find an existing conversation that includes both currentUser.uid and otherUserUid
+    const existingConversation = conversations.find(
+      (c) =>
+        c.participants.includes(currentUser.uid) &&
+        c.participants.includes(otherUserUid)
+    );
+    if (existingConversation) {
+      setSelectedChat(existingConversation.id);
+    } else {
+      // Optionally, create a new conversation if none exists
+      async function createConversation() {
+        try {
+          const newConvoRef = await addDoc(collection(db, "conversations"), {
+            participants: [currentUser.uid, otherUserUid],
+            createdAt: serverTimestamp(),
+            lastMessage: "",
+            lastMessageTimestamp: serverTimestamp(),
+          });
+          setSelectedChat(newConvoRef.id);
+        } catch (error) {
+          console.error("Error creating conversation:", error);
+        }
+      }
+      createConversation();
+    }
+  }, [otherUserUid, currentUser, conversations]);
 
   // Fetch messages for selected conversation
   useEffect(() => {
     if (!selectedChat) return;
-
     const messagesRef = collection(
       db,
       "conversations",
@@ -72,7 +101,6 @@ export default function ChatPage() {
       "messages"
     );
     const messagesQuery = query(messagesRef, orderBy("timestamp", "asc"));
-
     const unsubscribe = onSnapshot(messagesQuery, (snapshot) => {
       const msgs = snapshot.docs.map((doc) => ({
         id: doc.id,
@@ -80,29 +108,29 @@ export default function ChatPage() {
       }));
       setMessages(msgs);
     });
-
     return () => unsubscribe();
   }, [selectedChat]);
 
   // Fetch other user's info when a chat is selected
   useEffect(() => {
     if (!selectedChat || !currentUser) return;
-
     const selectedConversation = conversations.find(
       (c) => c.id === selectedChat
     );
     if (selectedConversation) {
-      const otherUserId = selectedConversation.participants.find(
+      const otherId = selectedConversation.participants.find(
         (id) => id !== currentUser.uid
       );
-      const userRef = doc(db, "users", otherUserId);
-      getDoc(userRef).then((docSnap) => {
-        if (docSnap.exists()) {
-          const userData = docSnap.data();
-          setOtherUserName(userData.displayName || "Unknown User");
-          setOtherUserLocation(userData.location || "No location set");
-        }
-      });
+      if (otherId) {
+        const userRef = doc(db, "users", otherId);
+        getDoc(userRef).then((docSnap) => {
+          if (docSnap.exists()) {
+            const userData = docSnap.data();
+            setOtherUserName(userData.displayName || "Unknown User");
+            setOtherUserLocation(userData.location || "No location set");
+          }
+        });
+      }
     }
   }, [selectedChat, currentUser, conversations]);
 
@@ -116,7 +144,7 @@ export default function ChatPage() {
         }).catch((error) => {
           console.error("Error updating read receipt:", error);
         });
-      }, 2000); // 2 second delay
+      }, 2000);
       return () => clearTimeout(timer);
     }
   }, [selectedChat, currentUser]);
@@ -130,7 +158,6 @@ export default function ChatPage() {
   const handleSendMessage = async (e) => {
     e.preventDefault();
     if (!newMessage.trim() || !selectedChat) return;
-
     try {
       const messagesRef = collection(
         db,
@@ -143,15 +170,12 @@ export default function ChatPage() {
         senderId: currentUser.uid,
         timestamp: serverTimestamp(),
       });
-
-      // Update conversation's last message and sender
       const conversationRef = doc(db, "conversations", selectedChat);
       await updateDoc(conversationRef, {
         lastMessage: newMessage,
         lastMessageTimestamp: serverTimestamp(),
         lastMessageSender: currentUser.uid,
       });
-
       setNewMessage("");
     } catch (error) {
       console.error("Error sending message:", error);
@@ -172,7 +196,6 @@ export default function ChatPage() {
           </div>
           <div className="overflow-y-auto h-[calc(100vh-5rem)]">
             {conversations.map((chat) => {
-              // Calculate unread status for conversation list
               const lastRead =
                 chat.readBy && chat.readBy[currentUser.uid]
                   ? chat.readBy[currentUser.uid]
@@ -182,7 +205,6 @@ export default function ChatPage() {
                 chat.lastMessageTimestamp &&
                 (!lastRead ||
                   chat.lastMessageTimestamp.toMillis() > lastRead.toMillis());
-
               return (
                 <div
                   key={chat.id}
@@ -301,7 +323,6 @@ export default function ChatPage() {
                     </div>
                   );
                 })}
-                {/* Dummy div to allow scrolling */}
                 <div ref={messagesEndRef} />
               </div>
 
