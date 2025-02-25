@@ -25,7 +25,7 @@ export const Hero = () => {
       {/* Left Column: Form */}
       <div className="w-full md:w-1/2 flex items-center  bg-white p-1 py-3">
         <div className="w-full ">
-          <h1 className="text-5xl font-bold text-gray-900 mb-4 leading-relaxed tracking-wide">
+          <h1 className="text-4xl font-bold text-gray-900 mb-4 leading-relaxed tracking-wide">
             Hire top talent anywhere
           </h1>
           <div className="flex  space-x-8 mt-4 w-full">
@@ -82,7 +82,7 @@ export const Hero = () => {
                   Price
                 </label>
                 <Select>
-                  <SelectTrigger className="mt-1 block w-full flex items-center justify-between">
+                  <SelectTrigger className="mt-1  w-full flex items-center justify-between">
                     <SelectValue placeholder="Select price range" />
                   </SelectTrigger>
                   <SelectContent>
@@ -102,7 +102,7 @@ export const Hero = () => {
                   Radius (miles)
                 </label>
                 <Select>
-                  <SelectTrigger className="mt-1 block w-full flex items-center justify-between">
+                  <SelectTrigger className="mt-1  w-full flex items-center justify-between">
                     <SelectValue placeholder="Select radius" />
                   </SelectTrigger>
                   <SelectContent>
@@ -133,11 +133,13 @@ export const Hero = () => {
       <div className="w-full md:w-full py-[5rem] top-[5rem] flex items-center justify-center  ">
         <div className="w-full h-full max-w-md max-h-md  rounded-lg overflow-hidden shadow-md">
           <iframe
-            title="Map"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.0862581819984!2d-122.40135168468127!3d37.79035097975614!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80858064c6b3013b%3A0x9c72af4b0c7e0a16!2sGoogle!5e0!3m2!1sen!2sus!4v1617802267037!5m2!1sen!2sus"
+            title="Liverpool City Center Map"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15374.817426969783!2d-2.9887131112282483!3d53.40837167133842!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487b2070b45f4ad3%3A0xf733ccf2c0e63c10!2sLiverpool%2C%20UK!5e0!3m2!1sen!2sus!4v1690000000000"
             className="w-full h-full object-cover"
+            style={{ border: 0 }}
             allowFullScreen=""
             loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
           ></iframe>
         </div>
       </div>
